@@ -1,0 +1,106 @@
+
+//USERS
+
+###
+POST http://localhost:8080/auth/register
+Content-Type: application/json
+
+{
+  "email": "John6@gmail.com",
+  "password": "A12345678",
+  "name": "John4"
+}
+
+###
+POST http://localhost:8080/auth/login
+Content-Type: application/json
+
+{
+  "email": "John5@gmail.com",
+  "password": "123456"
+}
+
+###
+POST http://localhost:8080/auth/logout
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJqdGkiOiIxIiwibmFtZSI6Inp6eiIsInN1YiI6ImFhYSIsImlhdCI6MTc0MjMwNjUyMSwiZXhwIjoxNzQyMzkyOTIxfQ.tuGps1EYXuc2nK1Nhzq3p67v7WSwIqkDIjaTx7Hu7Dr8SQxtod7WCnZOepyXTG1j
+
+###
+GET http://localhost:8080/api/user
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJqdGkiOiIxIiwibmFtZSI6IkpvaG40Iiwic3ViIjoiSm9objZAZ21haWwuY29tIiwiaWF0IjoxNzQ1NTI0MDU1LCJleHAiOjE3NDU2MTA0NTV9.A2zmFLaw13yXnpzQ6jMsimNXue69Q2uSeEu6OeJ69pDFmJzWEeuDAHgrXF-FHUu9
+
+
+//SHIPMENTS
+
+###
+POST http://localhost:8080/api/shipment/create
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJqdGkiOiIxIiwibmFtZSI6IkpvaG40Iiwic3ViIjoiSm9objdAZ21haWwuY29tIiwiaWF0IjoxNzQ1NTMxOTcwLCJleHAiOjE3NDU2MTgzNzB9.v3BlT5OVtEmIwQO5l5SbQI3mlzrDd5irpY0T5Sm0JPpyuyCC1HoJwoO5aNhvE92s
+Content-Type: application/json
+
+{
+  "productName": "Vaccine",
+  "description": "pfizer",
+  "origin": "Sant Pol de Mar",
+  "destination": "Brazil",
+  "deliveryDate": "2025-05-05",
+  "units": 2,
+  "weight": 2
+}
+
+###
+GET http://localhost:8080/api/shipment/1
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJqdGkiOiIxIiwibmFtZSI6IkpvaG40Iiwic3ViIjoiSm9objZAZ21haWwuY29tIiwiaWF0IjoxNzQ1NTI0NDkyLCJleHAiOjE3NDU2MTA4OTJ9.14zrWsoTAjaSCoNHIUmRWaJOvIEYHgUFRv00Zl1KU00XGdFOpTboVr_nZiUVvela
+
+###
+GET http://localhost:8080/api/shipment/nextId
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJqdGkiOiIxIiwibmFtZSI6IkpvaG40Iiwic3ViIjoiSm9objVAZ21haWwuY29tIiwiaWF0IjoxNzQ0NzIwNDgxLCJleHAiOjE3NDQ4MDY4ODF9.mwbuJ8_zVQSXYqhoXspyzWIX_vXAZxRQ8CGek0xXpy40My5bNLv7Z30vlyZE7nrw
+
+//TRANSFERS
+
+###
+POST http://localhost:8080/api/transfer/create
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJqdGkiOiIxIiwibmFtZSI6IkpvaG40Iiwic3ViIjoiSm9objdAZ21haWwuY29tIiwiaWF0IjoxNzQ1NTMxOTcwLCJleHAiOjE3NDU2MTgzNzB9.v3BlT5OVtEmIwQO5l5SbQI3mlzrDd5irpY0T5Sm0JPpyuyCC1HoJwoO5aNhvE92s
+Content-Type: application/json
+
+{
+  "shipmentId": 2,
+  "newShipmentOwner": "John6@gmail.com",
+  "newState": 1,
+  "location": "SAMBA3",
+  "transferNotes": "Transferred to your address"
+}
+
+###
+GET http://localhost:8080/api/transfer/SKU-C923FCE2
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJqdGkiOiIxIiwibmFtZSI6IkpvaG40Iiwic3ViIjoiSm9objdAZ21haWwuY29tIiwiaWF0IjoxNzQ1NTMxOTcwLCJleHAiOjE3NDU2MTgzNzB9.v3BlT5OVtEmIwQO5l5SbQI3mlzrDd5irpY0T5Sm0JPpyuyCC1HoJwoO5aNhvE92s
+
+###
+GET http://localhost:8080/api/transfer/nextId
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJqdGkiOiIxIiwibmFtZSI6IkpvaG40Iiwic3ViIjoiSm9objVAZ21haWwuY29tIiwiaWF0IjoxNzQ0NzIwNDgxLCJleHAiOjE3NDQ4MDY4ODF9.mwbuJ8_zVQSXYqhoXspyzWIX_vXAZxRQ8CGek0xXpy40My5bNLv7Z30vlyZE7nrw
+
+//RECCORDS
+
+###
+GET http://localhost:8080/api/records/shipment/1
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJqdGkiOiIxIiwibmFtZSI6IkpvaG40Iiwic3ViIjoiSm9objZAZ21haWwuY29tIiwiaWF0IjoxNzQ1NTI0NDkyLCJleHAiOjE3NDU2MTA4OTJ9.14zrWsoTAjaSCoNHIUmRWaJOvIEYHgUFRv00Zl1KU00XGdFOpTboVr_nZiUVvela
+
+###
+GET http://localhost:8080/api/records/stats
+
+###
+GET http://localhost:8080/api/records/participant
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJqdGkiOiIxIiwibmFtZSI6IkpvaG40Iiwic3ViIjoiSm9objZAZ21haWwuY29tIiwiaWF0IjoxNzQ1NTI0NDkyLCJleHAiOjE3NDU2MTA4OTJ9.14zrWsoTAjaSCoNHIUmRWaJOvIEYHgUFRv00Zl1KU00XGdFOpTboVr_nZiUVvela
+
+###
+GET http://localhost:8080/api/records/owner
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJqdGkiOiIxIiwibmFtZSI6IkpvaG40Iiwic3ViIjoiSm9objZAZ21haWwuY29tIiwiaWF0IjoxNzQ1NTI0NDkyLCJleHAiOjE3NDU2MTA4OTJ9.14zrWsoTAjaSCoNHIUmRWaJOvIEYHgUFRv00Zl1KU00XGdFOpTboVr_nZiUVvela
+
+//NOTIFICATIONS
+
+###
+GET http://localhost:8080/api/notification
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJqdGkiOiIyIiwibmFtZSI6IkpvaG40Iiwic3ViIjoiSm9objRAZ21haWwuY29tIiwiaWF0IjoxNzQ0MzE0MDE3LCJleHAiOjE3NDQ0MDA0MTd9.rxBTm-MQ7q_dPaBS3m8pBF7VYTJKgoIrawrRMM3ir3t8-14pMbp3PlQlEb27utMB
+
+###
+PATCH http://localhost:8080/api/notification/read/2
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJqdGkiOiIxIiwibmFtZSI6IkpvaG4zIiwic3ViIjoiSm9objNAZ21haWwuY29tIiwiaWF0IjoxNzQ0MzEzODcyLCJleHAiOjE3NDQ0MDAyNzJ9.tKEvqP52Dcqag59ZoqKqUi17a5hSgCLPj01R-0Go-2m09tU2nw0kIOkL37BOUQ9k
+
