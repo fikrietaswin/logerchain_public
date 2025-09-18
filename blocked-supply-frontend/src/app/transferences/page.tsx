@@ -7,6 +7,14 @@ import Link from "next/link";
 import ProtectedRoute from "@/components/protectedroute";
 import api from "@/utils/baseApi";
 
+/**
+ * Represents a shipment record.
+ * @property {number} shipmentId - The ID of the shipment.
+ * @property {string} sku - The SKU of the shipment.
+ * @property {string} createdAt - The timestamp when the shipment was created.
+ * @property {string} deliveryDate - The expected delivery date.
+ * @property {string} state - The current state of the shipment.
+ */
 interface ShipmentRecord {
     shipmentId: number;
     sku: string;
@@ -15,6 +23,14 @@ interface ShipmentRecord {
     state: string;
 }
 
+/**
+ * The transferences page for viewing shipments owned by the user.
+ * <p>
+ * This component displays a list of shipments that the authenticated user currently owns.
+ * </p>
+ *
+ * @returns {JSX.Element} The rendered transferences page.
+ */
 export default function TransferencesPage() {
     const [shipments, setShipments] = useState<ShipmentRecord[] | null>(null);
     const [loading, setLoading] = useState(false);

@@ -29,6 +29,14 @@ const navItems = [
     },
 ]
 
+/**
+ * A navigation component that displays the main navigation links.
+ * <p>
+ * This component renders a navigation bar with links to the main pages of the application.
+ * </p>
+ *
+ * @returns {JSX.Element} The rendered navigation component.
+ */
 export default function Navigation() {
     const pathname = usePathname()
 

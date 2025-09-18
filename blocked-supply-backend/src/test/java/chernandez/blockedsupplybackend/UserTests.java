@@ -8,6 +8,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
 
+/**
+ * Tests for the user-related endpoints.
+ */
 @SpringBootTest
 @AutoConfigureMockMvc
 @TestPropertySource(locations = "classpath:application-test.properties")
@@ -19,6 +22,9 @@ public class UserTests {
     @Autowired
     private ObjectMapper objectMapper;
 
+    /**
+     * Tests that the application context loads successfully.
+     */
     @Test
     void contextLoads() {
     }

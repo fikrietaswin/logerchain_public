@@ -16,12 +16,26 @@ import {useRouter} from "next/navigation";
 import {useAuth} from "@/context/AuthContext";
 import api from "@/utils/baseApi";
 
+/**
+ * Represents the user's data.
+ * @property {string} name - The user's name.
+ * @property {string} email - The user's email.
+ * @property {string} blockchainAddress - The user's blockchain address.
+ */
 interface UserData {
     name: string;
     email: string;
     blockchainAddress: string;
 }
 
+/**
+ * A modal component that displays user information and a logout button.
+ * <p>
+ * This component provides a dialog to view user details and to log out of the application.
+ * </p>
+ *
+ * @returns {JSX.Element} The rendered user info modal component.
+ */
 export function UserInfoModal() {
     const [open, setOpen] = useState(false);
     const [userData, setUserData] = useState<UserData | null>(null);

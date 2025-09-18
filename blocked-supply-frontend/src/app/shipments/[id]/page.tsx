@@ -9,6 +9,20 @@ import Loading from "@/components/loading";
 import ProtectedRoute from "@/components/protectedroute";
 import api from "@/utils/baseApi";
 
+/**
+ * Represents the detailed information of a shipment.
+ * @property {number} id - The ID of the shipment.
+ * @property {string} sku - The SKU of the shipment.
+ * @property {string} name - The name of the product.
+ * @property {string} description - The description of the shipment.
+ * @property {string} origin - The origin of the shipment.
+ * @property {string} destination - The destination of the shipment.
+ * @property {string} deliveryDate - The expected delivery date.
+ * @property {number} units - The number of units in the shipment.
+ * @property {number} weight - The weight of the shipment.
+ * @property {string} currentState - The current state of the shipment.
+ * @property {string} currentOwner - The current owner of the shipment.
+ */
 interface Shipment {
     id: number;
     sku: string;
@@ -23,6 +37,14 @@ interface Shipment {
     currentOwner: string;
 }
 
+/**
+ * The shipment detail page.
+ * <p>
+ * This component displays the detailed information of a specific shipment.
+ * </p>
+ *
+ * @returns {JSX.Element} The rendered shipment detail page.
+ */
 export default function ShipmentDetail() {
     const {id} = useParams();
     const [shipment, setShipment] = useState<Shipment | null>(null);

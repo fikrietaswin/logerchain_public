@@ -12,6 +12,16 @@ import ProtectedRoute from "@/components/protectedroute";
 import api from "@/utils/baseApi";
 
 
+/**
+ * Represents the output data for a transfer.
+ * @property {number} id - The ID of the transfer.
+ * @property {number} shipmentId - The ID of the shipment.
+ * @property {number} timestamp - The timestamp of the transfer.
+ * @property {string} newState - The new state of the shipment.
+ * @property {string} location - The location of the transfer.
+ * @property {string} newOwner - The new owner of the shipment.
+ * @property {string} transferNotes - Notes about the transfer.
+ */
 interface TransferOutput {
     id: number;
     shipmentId: number;
@@ -22,6 +32,14 @@ interface TransferOutput {
     transferNotes: string;
 }
 
+/**
+ * The traceability page for tracking shipments.
+ * <p>
+ * This component allows users to search for a shipment by its SKU and view its transfer history.
+ * </p>
+ *
+ * @returns {JSX.Element} The rendered traceability page.
+ */
 export default function TraceabilityPage() {
     const [shipmentSku, setShipmentSku] = useState("");
     const [transfers, setTransfers] = useState<TransferOutput[] | null>(null);

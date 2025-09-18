@@ -15,6 +15,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+/**
+ * Service for handling shipment record-related operations.
+ * <p>
+ * This class provides methods for retrieving shipment records and statistics.
+ * </p>
+ */
 @Service
 public class ShipmentRecordService {
 
@@ -26,6 +32,12 @@ public class ShipmentRecordService {
         this.authService = authService;
     }
 
+    /**
+     * Retrieves a shipment record by its ID.
+     *
+     * @param shipmentId The ID of the shipment to retrieve.
+     * @return A {@link ResponseEntity} containing the shipment record, or an error if not found.
+     */
     public ResponseEntity<?> getShipmentRecord(int shipmentId) {
         Optional<ShipmentRecord> record = shipmentRecordRepository.findById((long) shipmentId);
         if (record.isEmpty()) {
@@ -34,6 +46,11 @@ public class ShipmentRecordService {
         return new ResponseEntity<>(record.get(), HttpStatus.OK);
     }
 
+    /**
+     * Retrieves shipment statistics.
+     *
+     * @return A {@link ResponseEntity} containing a map of shipment statistics.
+     */
     public ResponseEntity<Map<String, Object>> getShipmentStatistics() {
         Map<String, Object> response = new HashMap<>();
 
@@ -52,6 +69,11 @@ public class ShipmentRecordService {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    /**
+     * Retrieves shipment records where the authenticated user is a participant.
+     *
+     * @return A {@link ResponseEntity} containing a list of shipment records.
+     */
     public ResponseEntity<?> getShipmentRecordsByParticipant() {
         User user = authService.getUserFromJWT();
         List<ShipmentRecord> list = shipmentRecordRepository.findByParticipantsContaining(user.getId());
@@ -61,6 +83,11 @@ public class ShipmentRecordService {
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
+    /**
+     * Retrieves shipment records where the authenticated user is the owner.
+     *
+     * @return A {@link ResponseEntity} containing a list of shipment records.
+     */
     public ResponseEntity<?> getShipmentRecordsByOwner() {
         User user = authService.getUserFromJWT();
         List<ShipmentRecord> list = shipmentRecordRepository.findByOwnerId(user.getId());

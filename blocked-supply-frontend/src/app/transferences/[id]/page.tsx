@@ -19,6 +19,14 @@ const stateMap: Record<string, number> = {
     "delivered": 3
 };
 
+/**
+ * Represents the transfer form data.
+ * @property {number} shipmentId - The ID of the shipment.
+ * @property {string} newShipmentOwner - The new owner of the shipment.
+ * @property {number} newState - The new state of the shipment.
+ * @property {string} location - The current location of the shipment.
+ * @property {string} transferNotes - Notes about the transfer.
+ */
 interface TransferForm {
     shipmentId: number;
     newShipmentOwner: string;
@@ -27,6 +35,14 @@ interface TransferForm {
     transferNotes: string;
 }
 
+/**
+ * Represents the errors in the transfer form.
+ * @property {string} [shipmentId] - Error message for shipmentId.
+ * @property {string} [newShipmentOwner] - Error message for newShipmentOwner.
+ * @property {string} [newState] - Error message for newState.
+ * @property {string} [location] - Error message for location.
+ * @property {string} [transferNotes] - Error message for transferNotes.
+ */
 interface TransferFormErrors {
     shipmentId?: string;
     newShipmentOwner?: string;
@@ -35,6 +51,14 @@ interface TransferFormErrors {
     transferNotes?: string;
 }
 
+/**
+ * The transfer shipment page.
+ * <p>
+ * This component provides a form to transfer a shipment to a new owner and update its state.
+ * </p>
+ *
+ * @returns {JSX.Element} The rendered transfer shipment page.
+ */
 export default function TransferShipmentPage() {
     const {id} = useParams();
     const router = useRouter();

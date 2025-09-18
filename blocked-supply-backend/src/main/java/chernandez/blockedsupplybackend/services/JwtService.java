@@ -12,6 +12,12 @@ import javax.crypto.SecretKey;
 import java.util.Date;
 import java.util.Map;
 
+/**
+ * Service for handling JSON Web Tokens (JWTs).
+ * <p>
+ * This class provides methods for generating, validating, and extracting information from JWTs.
+ * </p>
+ */
 @Service
 public class JwtService {
 
@@ -22,6 +28,12 @@ public class JwtService {
     @Value("${application.security.jwt.refresh-token.expiration}")
     private long refreshExpiration;
 
+    /**
+     * Extracts the username (subject) from a JWT.
+     *
+     * @param token The JWT from which to extract the username.
+     * @return The username contained in the token.
+     */
     public String extractUsername(final String token) {
         final Claims jwtToken = Jwts.parser()
                 .verifyWith(getSignInKey())
@@ -31,10 +43,22 @@ public class JwtService {
         return jwtToken.getSubject();
     }
 
+    /**
+     * Generates a standard access token for a user.
+     *
+     * @param user The user for whom to generate the token.
+     * @return A JWT as a string.
+     */
     public String generateToken(final User user) {
         return buildToken(user, expiration);
     }
 
+    /**
+     * Generates a refresh token for a user.
+     *
+     * @param user The user for whom to generate the token.
+     * @return A JWT as a string.
+     */
     public String generateRefreshToken(final User user) {
         return buildToken(user, refreshExpiration);
     }
@@ -55,6 +79,13 @@ public class JwtService {
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
+    /**
+     * Validates a JWT.
+     *
+     * @param token The token to validate.
+     * @param user  The user to validate the token against.
+     * @return True if the token is valid, false otherwise.
+     */
     public boolean isTokenValid(final String token, User user) {
         final String username = extractUsername(token);
         return username.equals(user.getEmail()) && !isTokenExpired(token);

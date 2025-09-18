@@ -20,6 +20,13 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Service for handling shipment-related operations.
+ * <p>
+ * This class provides methods for creating and retrieving shipments, interacting with the
+ * blockchain broker to perform these operations.
+ * </p>
+ */
 @Service
 public class ShipmentService {
 
@@ -42,6 +49,13 @@ public class ShipmentService {
         this.transferService = transferService;
     }
 
+    /**
+     * Creates a new shipment.
+     *
+     * @param shipmentInput The input data for creating the shipment.
+     * @return A {@link ResponseEntity} with the result of the creation operation.
+     * @throws Exception if an error occurs during shipment creation.
+     */
     public ResponseEntity<?> createShipment(ShipmentInput shipmentInput) throws Exception {
         ResponseEntity<?> validationResult = checkCreateInputs(shipmentInput);
         if (validationResult != null) {
@@ -95,6 +109,12 @@ public class ShipmentService {
         }
     }
 
+    /**
+     * Retrieves a specific shipment by its ID.
+     *
+     * @param shipmentId The ID of the shipment to retrieve.
+     * @return A {@link ResponseEntity} containing the shipment details.
+     */
     public ResponseEntity<?> getShipment(int shipmentId) {
         ShipmentRecord record = shipmentRecordRepository.findById((long) shipmentId).orElse(null);
         if (record == null) {
@@ -140,6 +160,11 @@ public class ShipmentService {
     }
 
 
+    /**
+     * Retrieves the next available shipment ID from the blockchain.
+     *
+     * @return A {@link ResponseEntity} containing the next shipment ID.
+     */
     public ResponseEntity<?> getNextShipmentId() {
         try {
             String url = brokerBaseUrl + "/api/shipments/next-id";

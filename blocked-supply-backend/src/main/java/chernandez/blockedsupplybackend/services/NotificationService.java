@@ -12,6 +12,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Service for handling notification-related operations.
+ * <p>
+ * This class provides methods for retrieving and managing user notifications.
+ * </p>
+ */
 @Service
 public class NotificationService {
 
@@ -23,6 +29,11 @@ public class NotificationService {
         this.authService = authService;
     }
 
+    /**
+     * Retrieves all unread notifications for the authenticated user.
+     *
+     * @return A {@link ResponseEntity} containing a list of {@link NotificationOutput}.
+     */
     public ResponseEntity<List<NotificationOutput>> getNotifications() {
         User user = authService.getUserFromJWT();
         List<Notification> notifications = notificationRepository.findByToUserIdAndIsReadFalseOrderByCreatedAtDesc(user.getId());
@@ -42,6 +53,12 @@ public class NotificationService {
         return new ResponseEntity<>(notificationOutputs, HttpStatus.OK);
     }
 
+    /**
+     * Marks a specific notification as read.
+     *
+     * @param notificationId The ID of the notification to mark as read.
+     * @return A {@link ResponseEntity} with the result of the operation.
+     */
     public ResponseEntity<?> markAsRead(int notificationId) {
         User user = authService.getUserFromJWT();
         Optional<Notification> notifOpt = notificationRepository.findById((long) notificationId);
@@ -58,6 +75,11 @@ public class NotificationService {
         return new ResponseEntity<>("Notification does not exist.", HttpStatus.NOT_FOUND);
     }
 
+    /**
+     * Marks all unread notifications for the authenticated user as read.
+     *
+     * @return A {@link ResponseEntity} with the result of the operation.
+     */
     public ResponseEntity<?> markAllAsRead() {
         User user = authService.getUserFromJWT();
         List<Notification> notifications = notificationRepository.findByToUserIdAndIsReadFalseOrderByCreatedAtDesc(user.getId());

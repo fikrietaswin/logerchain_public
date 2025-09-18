@@ -6,6 +6,14 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Represents a JWT token entity.
+ * <p>
+ * This class is an entity that maps to the "tokens" table in the database.
+ * It contains information about a JWT, such as the token string, its type,
+ * whether it's revoked or expired, and the user it belongs to.
+ * </p>
+ */
 @Data
 @Builder
 @NoArgsConstructor
@@ -27,7 +35,13 @@ public class Token {
     @JoinColumn(name = "user_id")
     private User user;
 
+    /**
+     * Represents the type of a token.
+     */
     public enum TokenType {
+        /**
+         * Bearer token type.
+         */
         BEARER
     }
 

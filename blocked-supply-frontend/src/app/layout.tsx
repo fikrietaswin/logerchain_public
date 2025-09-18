@@ -14,6 +14,13 @@ import {NotificationInbox} from "@/components/NotificationInbox";
 
 const inter = Inter({subsets: ["latin"]});
 
+/**
+ * The root layout for the application.
+ *
+ * @param {object} props - The properties for the component.
+ * @param {React.ReactNode} props.children - The child elements to render.
+ * @returns {JSX.Element} The rendered root layout.
+ */
 export default function RootLayout({children}: { children: React.ReactNode }) {
     const pathname = usePathname();
     const isAuthPage = pathname.startsWith("/auth");

@@ -8,6 +8,14 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+/**
+ * Represents a user entity.
+ * <p>
+ * This class is an entity that maps to the "users" table in the database.
+ * It contains information about a user, such as their name, email, password,
+ * blockchain address, roles, and associated tokens.
+ * </p>
+ */
 @Data
 @Builder
 @NoArgsConstructor

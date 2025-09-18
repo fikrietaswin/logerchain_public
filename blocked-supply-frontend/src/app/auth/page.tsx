@@ -12,22 +12,46 @@ import {Label} from "@/components/ui/label"
 import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/components/ui/tabs"
 import {useAuth} from "@/context/AuthContext";
 
+/**
+ * Represents the login form data.
+ * @property {string} email - The user's email.
+ * @property {string} password - The user's password.
+ */
 interface LoginForm {
     email: string;
     password: string;
 }
 
+/**
+ * Represents the registration form data.
+ * @property {string} email - The user's email.
+ * @property {string} password - The user's password.
+ * @property {string} name - The user's name.
+ */
 interface RegisterForm {
     email: string;
     password: string;
     name: string;
 }
 
+/**
+ * Represents the token response from the server.
+ * @property {string} access_token - The access token.
+ * @property {string} refresh_token - The refresh token.
+ */
 interface TokenResponse {
     access_token: string;
     refresh_token: string;
 }
 
+/**
+ * The authentication page for user login and registration.
+ * <p>
+ * This component provides a tabbed interface for users to either log in or register.
+ * </p>
+ *
+ * @returns {JSX.Element} The rendered authentication page.
+ */
 export default function AuthPage() {
     const [showPassword, setShowPassword] = useState(false);
     const [activeTab, setActiveTab] = useState("login");

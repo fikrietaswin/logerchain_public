@@ -1,8 +1,20 @@
+/**
+ * @file This file defines the API routes for the node-broker application.
+ * @module routes
+ */
+
 const express = require('express');
 const router = express.Router();
 const { web3, contract } = require('./blockchain');
 
-//FETCH NEXT IDS
+/**
+ * @name GET /api/shipments/next-id
+ * @description Fetches the next available shipment ID from the smart contract.
+ * @function
+ * @async
+ * @param {express.Request} req - The Express request object.
+ * @param {express.Response} res - The Express response object.
+ */
 router.get('/shipments/next-id', async (req, res) => {
     try {
         const nextShipmentId = await contract.methods.getNextShipmentId().call();
@@ -11,6 +23,15 @@ router.get('/shipments/next-id', async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 });
+
+/**
+ * @name GET /api/transfers/next-id
+ * @description Fetches the next available transfer ID from the smart contract.
+ * @function
+ * @async
+ * @param {express.Request} req - The Express request object.
+ * @param {express.Response} res - The Express response object.
+ */
 router.get('/transfers/next-id', async (req, res) => {
     try {
         const nextTransferId = await contract.methods.getNextTransferId().call();
@@ -20,7 +41,14 @@ router.get('/transfers/next-id', async (req, res) => {
     }
 });
 
-// CREATE SHIPMENT
+/**
+ * @name POST /api/shipments
+ * @description Creates a new shipment on the blockchain.
+ * @function
+ * @async
+ * @param {express.Request} req - The Express request object.
+ * @param {express.Response} res - The Express response object.
+ */
 router.post('/shipments', async (req, res) => {
     const {
         productName,
@@ -72,7 +100,14 @@ router.post('/shipments', async (req, res) => {
     }
 });
 
-// GET SHIPMENT
+/**
+ * @name GET /api/shipments/:shipmentId
+ * @description Fetches a specific shipment from the blockchain.
+ * @function
+ * @async
+ * @param {express.Request} req - The Express request object.
+ * @param {express.Response} res - The Express response object.
+ */
 router.get('/shipments/:shipmentId', async (req, res) => {
     const { shipmentId } = req.params;
 
@@ -96,7 +131,14 @@ router.get('/shipments/:shipmentId', async (req, res) => {
     }
 });
 
-// TRANSFER SHIPMENT
+/**
+ * @name POST /api/shipments/:shipmentId/transfer
+ * @description Transfers a shipment to a new owner on the blockchain.
+ * @function
+ * @async
+ * @param {express.Request} req - The Express request object.
+ * @param {express.Response} res - The Express response object.
+ */
 router.post('/shipments/:shipmentId/transfer', async (req, res) => {
     const { shipmentId } = req.params;
     const { 
@@ -140,7 +182,14 @@ router.post('/shipments/:shipmentId/transfer', async (req, res) => {
     }
 });
 
-// GET SHIPMENT TRANSFERS
+/**
+ * @name GET /api/shipments/:shipmentId/transfers
+ * @description Fetches the transfer history of a specific shipment from the blockchain.
+ * @function
+ * @async
+ * @param {express.Request} req - The Express request object.
+ * @param {express.Response} res - The Express response object.
+ */
 router.get('/shipments/:shipmentId/transfers', async (req, res) => {
     const { shipmentId } = req.params;
 
@@ -163,7 +212,14 @@ router.get('/shipments/:shipmentId/transfers', async (req, res) => {
     }
 });
 
-// GET ALL GANACHE ACCOUNTS
+/**
+ * @name GET /api/accounts
+ * @description Fetches all available accounts from the blockchain node.
+ * @function
+ * @async
+ * @param {express.Request} req - The Express request object.
+ * @param {express.Response} res - The Express response object.
+ */
 router.get('/accounts', async (req, res) => {
     try {
         const accounts = await web3.eth.getAccounts();
