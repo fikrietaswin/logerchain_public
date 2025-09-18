@@ -6,14 +6,29 @@ import {X} from "lucide-react"
 
 import {cn} from "@/lib/utils"
 
+/**
+ * The root component for the dialog.
+ */
 const Dialog = DialogPrimitive.Root
 
+/**
+ * A button that triggers the dialog to open.
+ */
 const DialogTrigger = DialogPrimitive.Trigger
 
+/**
+ * A portal that renders its children into a new stacking context.
+ */
 const DialogPortal = DialogPrimitive.Portal
 
+/**
+ * A button that closes the dialog.
+ */
 const DialogClose = DialogPrimitive.Close
 
+/**
+ * A dark overlay that covers the page when the dialog is open.
+ */
 const DialogOverlay = React.forwardRef<
     React.ElementRef<typeof DialogPrimitive.Overlay>,
     React.ComponentPropsWithoutRef<typeof DialogPrimitive.Overlay>
@@ -29,6 +44,9 @@ const DialogOverlay = React.forwardRef<
 ))
 DialogOverlay.displayName = DialogPrimitive.Overlay.displayName
 
+/**
+ * The main content of the dialog.
+ */
 const DialogContent = React.forwardRef<
     React.ElementRef<typeof DialogPrimitive.Content>,
     React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>
@@ -54,6 +72,9 @@ const DialogContent = React.forwardRef<
 ))
 DialogContent.displayName = DialogPrimitive.Content.displayName
 
+/**
+ * A header for the dialog.
+ */
 const DialogHeader = ({
                           className,
                           ...props
@@ -68,6 +89,9 @@ const DialogHeader = ({
 )
 DialogHeader.displayName = "DialogHeader"
 
+/**
+ * A footer for the dialog.
+ */
 const DialogFooter = ({
                           className,
                           ...props
@@ -82,6 +106,9 @@ const DialogFooter = ({
 )
 DialogFooter.displayName = "DialogFooter"
 
+/**
+ * A title for the dialog.
+ */
 const DialogTitle = React.forwardRef<
     React.ElementRef<typeof DialogPrimitive.Title>,
     React.ComponentPropsWithoutRef<typeof DialogPrimitive.Title>
@@ -97,6 +124,9 @@ const DialogTitle = React.forwardRef<
 ))
 DialogTitle.displayName = DialogPrimitive.Title.displayName
 
+/**
+ * A description for the dialog.
+ */
 const DialogDescription = React.forwardRef<
     React.ElementRef<typeof DialogPrimitive.Description>,
     React.ComponentPropsWithoutRef<typeof DialogPrimitive.Description>

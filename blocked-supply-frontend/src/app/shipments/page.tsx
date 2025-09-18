@@ -14,6 +14,16 @@ import 'react-datepicker/dist/react-datepicker.css'
 import {format} from 'date-fns'
 import api from "@/utils/baseApi";
 
+/**
+ * Represents the shipment creation form data.
+ * @property {string} productName - The name of the product.
+ * @property {string} description - The description of the shipment.
+ * @property {string} origin - The origin of the shipment.
+ * @property {string} destination - The destination of the shipment.
+ * @property {string} deliveryDate - The expected delivery date.
+ * @property {string} units - The number of units in the shipment.
+ * @property {string} weight - The weight of the shipment.
+ */
 interface ShipmentForm {
     productName: string;
     description: string;
@@ -24,6 +34,14 @@ interface ShipmentForm {
     weight: string;
 }
 
+/**
+ * Represents a shipment record.
+ * @property {number} shipmentId - The ID of the shipment.
+ * @property {string} sku - The SKU of the shipment.
+ * @property {string} createdAt - The timestamp when the shipment was created.
+ * @property {string} deliveryDate - The expected delivery date.
+ * @property {string} state - The current state of the shipment.
+ */
 interface ShipmentRecord {
     shipmentId: number;
     sku: string;
@@ -32,6 +50,14 @@ interface ShipmentRecord {
     state: string;
 }
 
+/**
+ * The shipments page, for viewing and creating shipments.
+ * <p>
+ * This component allows users to view a list of their shipments and create new ones.
+ * </p>
+ *
+ * @returns {JSX.Element} The rendered shipments page.
+ */
 export default function ShipmentsPage() {
     const [shipments, setShipments] = useState<ShipmentRecord[] | null>(null);
     const [error, setError] = useState<string | null>(null);

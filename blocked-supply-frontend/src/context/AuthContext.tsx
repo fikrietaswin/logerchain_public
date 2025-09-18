@@ -3,6 +3,12 @@ import {useRouter} from "next/navigation";
 import Loading from "@/components/loading";
 import api from "@/utils/baseApi";
 
+/**
+ * Represents the authentication context type.
+ * @property {string | null} token - The authentication token.
+ * @property {(token: string) => void} login - The login function.
+ * @property {() => void} logout - The logout function.
+ */
 interface AuthContextType {
     token: string | null;
     login: (token: string) => void;
@@ -11,6 +17,13 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
+/**
+ * Provides authentication context to its children components.
+ *
+ * @param {object} props - The properties for the component.
+ * @param {React.ReactNode} props.children - The child elements to render.
+ * @returns {JSX.Element} The rendered authentication provider.
+ */
 export const AuthProvider = ({children}: { children: React.ReactNode }) => {
     const [token, setToken] = useState<string | null>(null);
     const [loading, setLoading] = useState(true);
@@ -55,6 +68,12 @@ export const AuthProvider = ({children}: { children: React.ReactNode }) => {
     );
 };
 
+/**
+ * A hook to use the authentication context.
+ *
+ * @returns {AuthContextType} The authentication context.
+ * @throws {Error} If used outside of an AuthProvider.
+ */
 export const useAuth = (): AuthContextType => {
     const context = useContext(AuthContext);
     if (context === undefined) {

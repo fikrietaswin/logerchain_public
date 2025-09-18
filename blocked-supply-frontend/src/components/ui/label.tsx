@@ -6,10 +6,16 @@ import {cva, type VariantProps} from "class-variance-authority"
 
 import {cn} from "@/lib/utils"
 
+/**
+ * A set of variants for the label component.
+ */
 const labelVariants = cva(
     "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
 )
 
+/**
+ * A styled label component.
+ */
 const Label = React.forwardRef<
     React.ElementRef<typeof LabelPrimitive.Root>,
     React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root> &

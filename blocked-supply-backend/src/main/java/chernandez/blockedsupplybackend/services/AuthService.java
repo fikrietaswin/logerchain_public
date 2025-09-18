@@ -27,6 +27,14 @@ import org.springframework.web.client.RestTemplate;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Service class for handling authentication-related business logic.
+ * <p>
+ * This class provides methods for user registration, login, token refreshing,
+ * and retrieving user information. It interacts with the user repository,
+ * token repository, and JWT service to perform these operations.
+ * </p>
+ */
 @Service
 @RequiredArgsConstructor
 public class AuthService {
@@ -43,6 +51,13 @@ public class AuthService {
     @Value("${application.security.encryption.secret-key}")
     private String encryptionKey;
 
+    /**
+     * Registers a new user.
+     *
+     * @param request The registration request containing user details.
+     * @return A {@link ResponseEntity} with the authentication token upon successful registration.
+     * @throws Exception If an error occurs during registration.
+     */
     public ResponseEntity<?> register(RegisterRequest request) throws Exception {
         ResponseEntity<?> validationResult = checkRegisterInput(request);
         if (validationResult != null) {
@@ -66,6 +81,12 @@ public class AuthService {
         return ResponseEntity.ok(new TokenResponse(jwtToken, refreshToken));
     }
 
+    /**
+     * Authenticates a user and returns a new JWT.
+     *
+     * @param request The login request containing user credentials.
+     * @return A {@link TokenResponse} containing the new JWT and refresh token.
+     */
     public TokenResponse login(LoginRequest request) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.email(), request.password())
@@ -78,6 +99,12 @@ public class AuthService {
         return new TokenResponse(jwtToken, refreshToken);
     }
 
+    /**
+     * Refreshes an authentication token.
+     *
+     * @param authHeader The Authorization header containing the refresh token.
+     * @return A {@link TokenResponse} containing the new access token and the original refresh token.
+     */
     public TokenResponse refreshToken(final String authHeader) {
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             throw new IllegalArgumentException("Invalid Bearer token");
@@ -99,6 +126,11 @@ public class AuthService {
         return new TokenResponse(accessToken, refreshToken);
     }
 
+    /**
+     * Retrieves the authenticated user from the JWT in the security context.
+     *
+     * @return The authenticated {@link User}.
+     */
     public User getUserFromJWT() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String email = authentication.getName();
@@ -128,6 +160,12 @@ public class AuthService {
         }
     }
 
+    /**
+     * Retrieves the details of the authenticated user.
+     *
+     * @return A {@link ResponseEntity} containing the user's details.
+     * @throws Exception If an error occurs while decrypting the blockchain address.
+     */
     public ResponseEntity<?> getUser() throws Exception {
         User user = getUserFromJWT();
         if (user == null) {

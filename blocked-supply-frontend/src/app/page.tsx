@@ -7,6 +7,14 @@ import {useEffect, useState} from "react";
 import Loading from "@/components/loading";
 import api from "@/utils/baseApi";
 
+/**
+ * The home page of the application.
+ * <p>
+ * This component displays statistics about shipments and provides an overview of the application.
+ * </p>
+ *
+ * @returns {JSX.Element} The rendered home page.
+ */
 export default function HomePage() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);

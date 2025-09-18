@@ -24,6 +24,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Service for handling shipment transfer operations.
+ * <p>
+ * This class provides methods for transferring shipments, retrieving transfer history,
+ * and interacting with the blockchain broker to perform these operations.
+ * </p>
+ */
 @Service
 public class TransferService {
 
@@ -46,6 +53,13 @@ public class TransferService {
         this.authService = authService;
     }
 
+    /**
+     * Transfers a shipment to a new owner.
+     *
+     * @param transferInput The input data for the transfer.
+     * @return A {@link ResponseEntity} with the result of the transfer operation.
+     * @throws Exception if an error occurs during the transfer.
+     */
     public ResponseEntity<?> transferShipment(TransferInput transferInput) throws Exception {
         ResponseEntity<?> validationResult = checkTransferInputs(transferInput);
         if (validationResult != null) {
@@ -112,6 +126,12 @@ public class TransferService {
         }
     }
 
+    /**
+     * Retrieves the transfer history for a specific shipment SKU.
+     *
+     * @param sku The SKU of the shipment.
+     * @return A {@link ResponseEntity} containing the transfer history.
+     */
     public ResponseEntity<?> getTransferHistory(String sku) {
         ShipmentRecord record = shipmentRecordRepository.findBySku(sku).orElse(null);
         if (record == null) {
@@ -160,6 +180,11 @@ public class TransferService {
         }
     }
 
+    /**
+     * Retrieves the next available transfer ID from the blockchain.
+     *
+     * @return A {@link ResponseEntity} containing the next transfer ID.
+     */
     public ResponseEntity<?> getNextTransferId() {
         try {
             String url = brokerBaseUrl + "/api/transfers/next-id";

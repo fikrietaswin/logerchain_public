@@ -1,15 +1,30 @@
+/**
+ * @file Test suite for the ShipmentManagement smart contract.
+ * @module ShipmentManagement.test
+ */
+
 const ShipmentManagement = artifacts.require("ShipmentManagement");
 
+/**
+ * Test suite for the ShipmentManagement contract.
+ * @param {string[]} accounts - The accounts provided by the Truffle environment.
+ */
 contract("ShipmentManagement", accounts => {
   const owner = accounts[0];
   const user1 = accounts[1];
   const user2 = accounts[2];
   let contract;
 
+  /**
+   * Deploys a new instance of the contract before each test.
+   */
   beforeEach(async () => {
     contract = await ShipmentManagement.new();
   });
 
+  /**
+   * Test case to verify that a shipment can be created successfully.
+   */
   it("should create a shipment successfully", async () => {
     const result = await contract.createShipment(
       "Product A",
@@ -37,6 +52,9 @@ contract("ShipmentManagement", accounts => {
     assert.strictEqual(shipment[9], owner);
   });
 
+  /**
+   * Test case to verify that a shipment cannot be created with 0 units or weight.
+   */
   it("should not create a shipment with 0 units or weight", async () => {
     try {
       await contract.createShipment(
@@ -71,6 +89,9 @@ contract("ShipmentManagement", accounts => {
     }
   });
 
+  /**
+   * Test case to verify that a shipment can be transferred by its owner.
+   */
   it("should allow shipment transfer by owner", async () => {
     await contract.createShipment(
       "Product B",
@@ -102,6 +123,9 @@ contract("ShipmentManagement", accounts => {
     assert.strictEqual(transfers[0].transferNotes, "Left origin");
   });
 
+  /**
+   * Test case to verify that a shipment cannot be transferred by a non-owner.
+   */
   it("should reject shipment transfer by non-owner", async () => {
     await contract.createShipment(
       "Product C",
@@ -129,6 +153,9 @@ contract("ShipmentManagement", accounts => {
     }
   });
 
+  /**
+   * Test case to verify that multiple transfers are recorded correctly.
+   */
   it("should record multiple transfers", async () => {
     await contract.createShipment(
       "Product D",
@@ -150,6 +177,9 @@ contract("ShipmentManagement", accounts => {
     assert.strictEqual(transfers[1].transferNotes, "Returned");
   });
 
+  /**
+   * Test case to verify that calls for non-existent shipments are rejected.
+   */
   it("should reject calls for non-existent shipment", async () => {
     try {
       await contract.getShipment(999);
@@ -166,6 +196,9 @@ contract("ShipmentManagement", accounts => {
     }
   });
 
+  /**
+   * Test case to verify that the next shipment and transfer IDs are returned correctly.
+   */
   it("should return next shipment and transfer IDs", async () => {
     const nextShipmentBefore = await contract.getNextShipmentId();
     const nextTransferBefore = await contract.getNextTransferId();

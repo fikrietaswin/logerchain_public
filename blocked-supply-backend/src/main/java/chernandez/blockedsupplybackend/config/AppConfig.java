@@ -14,12 +14,24 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+/**
+ * Application configuration class.
+ * <p>
+ * This class provides configuration for Spring Security, including beans for
+ * UserDetailsService, AuthenticationProvider, AuthenticationManager, and PasswordEncoder.
+ * </p>
+ */
 @Configuration
 @RequiredArgsConstructor
 public class AppConfig {
 
     private final UserRepository userRepository;
 
+    /**
+     * Provides a UserDetailsService bean that loads user-specific data.
+     *
+     * @return A {@link UserDetailsService} implementation.
+     */
     @Bean
     public UserDetailsService userDetailsService() {
         return username -> {
@@ -32,6 +44,11 @@ public class AppConfig {
         };
     }
 
+    /**
+     * Provides an AuthenticationProvider bean that uses the UserDetailsService and PasswordEncoder.
+     *
+     * @return An {@link AuthenticationProvider} implementation.
+     */
     @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
@@ -40,11 +57,23 @@ public class AppConfig {
         return authProvider;
     }
 
+    /**
+     * Provides an AuthenticationManager bean.
+     *
+     * @param config The authentication configuration.
+     * @return An {@link AuthenticationManager} implementation.
+     * @throws Exception if an error occurs while getting the authentication manager.
+     */
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
     }
 
+    /**
+     * Provides a PasswordEncoder bean that uses BCrypt hashing.
+     *
+     * @return A {@link PasswordEncoder} implementation.
+     */
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();

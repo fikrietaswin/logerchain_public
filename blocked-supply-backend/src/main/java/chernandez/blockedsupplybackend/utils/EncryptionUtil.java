@@ -6,10 +6,25 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import java.util.Base64;
 
+/**
+ * A utility class for encryption and decryption.
+ * <p>
+ * This class provides static methods for encrypting and decrypting data using AES,
+ * as well as for generating a new AES key.
+ * </p>
+ */
 public class EncryptionUtil {
 
     private static final String ALGORITHM = "AES";
 
+    /**
+     * Encrypts a string using AES.
+     *
+     * @param key  The encryption key.
+     * @param data The data to encrypt.
+     * @return The encrypted data as a Base64 encoded string.
+     * @throws Exception if an error occurs during encryption.
+     */
     public static String encrypt(String key, String data) throws Exception {
         SecretKeySpec secretKey = new SecretKeySpec(key.getBytes(), ALGORITHM);
         Cipher cipher = Cipher.getInstance(ALGORITHM);
@@ -18,6 +33,14 @@ public class EncryptionUtil {
         return Base64.getEncoder().encodeToString(encryptedData);
     }
 
+    /**
+     * Decrypts a string using AES.
+     *
+     * @param key           The decryption key.
+     * @param encryptedData The encrypted data as a Base64 encoded string.
+     * @return The decrypted data.
+     * @throws Exception if an error occurs during decryption.
+     */
     public static String decrypt(String key, String encryptedData) throws Exception {
         SecretKeySpec secretKey = new SecretKeySpec(key.getBytes(), ALGORITHM);
         Cipher cipher = Cipher.getInstance(ALGORITHM);
@@ -27,6 +50,12 @@ public class EncryptionUtil {
         return new String(decryptedData);
     }
 
+    /**
+     * Generates a new AES key.
+     *
+     * @return A new AES key as a Base64 encoded string.
+     * @throws Exception if an error occurs during key generation.
+     */
     public static String generateKey() throws Exception {
         KeyGenerator keyGen = KeyGenerator.getInstance(ALGORITHM);
         keyGen.init(128);

@@ -5,8 +5,14 @@ import * as TabsPrimitive from "@radix-ui/react-tabs"
 
 import {cn} from "@/lib/utils"
 
+/**
+ * The root component for the tabs.
+ */
 const Tabs = TabsPrimitive.Root
 
+/**
+ * A list of tabs.
+ */
 const TabsList = React.forwardRef<
     React.ElementRef<typeof TabsPrimitive.List>,
     React.ComponentPropsWithoutRef<typeof TabsPrimitive.List>
@@ -22,6 +28,9 @@ const TabsList = React.forwardRef<
 ))
 TabsList.displayName = TabsPrimitive.List.displayName
 
+/**
+ * A button that activates a tab.
+ */
 const TabsTrigger = React.forwardRef<
     React.ElementRef<typeof TabsPrimitive.Trigger>,
     React.ComponentPropsWithoutRef<typeof TabsPrimitive.Trigger>
@@ -37,6 +46,9 @@ const TabsTrigger = React.forwardRef<
 ))
 TabsTrigger.displayName = TabsPrimitive.Trigger.displayName
 
+/**
+ * The content of a tab.
+ */
 const TabsContent = React.forwardRef<
     React.ElementRef<typeof TabsPrimitive.Content>,
     React.ComponentPropsWithoutRef<typeof TabsPrimitive.Content>

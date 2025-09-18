@@ -1,4 +1,9 @@
 /**
+ * @file This file is the Truffle configuration file.
+ * @module truffle-config
+ */
+
+/**
  * Use this file to configure your truffle project. It's seeded with some
  * common settings for different networks and features like migrations,
  * compilation, and testing. Uncomment the ones you need or modify

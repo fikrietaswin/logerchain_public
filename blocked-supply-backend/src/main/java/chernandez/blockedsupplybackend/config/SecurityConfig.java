@@ -20,6 +20,13 @@ import java.util.List;
 
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
+/**
+ * Security configuration class for the application.
+ * <p>
+ * This class configures Spring Security, including CORS, CSRF, session management,
+ * request authorization, and JWT filter integration.
+ * </p>
+ */
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
@@ -30,6 +37,13 @@ public class SecurityConfig {
     private final AuthenticationProvider authenticationProvider;
     private final TokenRepository tokenRepository;
 
+    /**
+     * Configures the security filter chain.
+     *
+     * @param http The {@link HttpSecurity} to configure.
+     * @return The configured {@link SecurityFilterChain}.
+     * @throws Exception if an error occurs during configuration.
+     */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http

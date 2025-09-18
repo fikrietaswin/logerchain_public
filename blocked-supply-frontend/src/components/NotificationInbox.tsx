@@ -15,6 +15,13 @@ import {useRouter} from "next/navigation";
 import {Button} from "@/components/ui/button";
 import {Bell} from "lucide-react";
 
+/**
+ * Represents the data for a single notification.
+ * @property {number} id - The ID of the notification.
+ * @property {string} message - The content of the notification.
+ * @property {string} createdAt - The timestamp when the notification was created.
+ * @property {boolean} isRead - A boolean indicating whether the notification has been read.
+ */
 interface NotificationData {
     id: number;
     message: string;
@@ -22,6 +29,14 @@ interface NotificationData {
     isRead: boolean;
 }
 
+/**
+ * A component that displays a user's notification inbox.
+ * <p>
+ * This component provides a dialog to view, mark as read, and manage notifications.
+ * </p>
+ *
+ * @returns {JSX.Element} The rendered notification inbox component.
+ */
 export function NotificationInbox() {
     const [open, setOpen] = useState(false);
     const [notifications, setNotifications] = useState<NotificationData[]>([]);
